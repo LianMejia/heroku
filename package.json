@@ -1,0 +1,19 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "api para web",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "author": "Lian Mejia <lianmejiag@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "mysql": "^2.18.1",
+    "express": "^4.17.1"
+  }
+}
