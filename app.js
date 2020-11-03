@@ -12,13 +12,14 @@ app.use(bodyParser.json());
 //MySql
 const connection = mysql.createConnection({
     host: 'us-cdbr-east-02.cleardb.com',
-    user: 'bfe8670fd52af4',
-    password: '68229b1a',
-    database: 'heroku_ee3112de2f45482'
+    user: 'b49b526303d637',
+    password: '66f7bfc9',
+    database: 'heroku_3fbb44d2f435376'
     /* host: 'localhost',
     user: 'root',
     password: '',
     database: 'api_web' */
+    // mysql://b49b526303d637:66f7bfc9@us-cdbr-east-02.cleardb.com/heroku_3fbb44d2f435376?reconnect=true
 });
 
 //Route
