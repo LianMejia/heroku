@@ -55,7 +55,7 @@ app.get('/products/:id', (req, res) => {
     /* res.send('Get products by Id'); */
 });
 
-app.post('/add', (req, res) => {
+app.post('/products', (req, res) => {
     const sql = 'INSERT INTO productos SET ?';
     const productsObj = {
         titulo: req.body.titulo,
@@ -69,7 +69,7 @@ app.post('/add', (req, res) => {
     /* res.send('New product'); */
 });
 
-app.put('/update/:id', (req, res) => {
+app.put('/products/:id', (req, res) => {
     const {id} = req.params;
     const {titulo, price, description} = req.body;
     const sql = `UPDATE productos SET titulo = '${titulo}', price = '${price}', description = '${description}'
@@ -81,7 +81,7 @@ app.put('/update/:id', (req, res) => {
     /* res.send('Update product'); */
 });
 
-app.delete('/delete/:id', (req, res) => {
+app.delete('/products/:id', (req, res) => {
     const {id} = req.params;
     const sql = `DELETE FROM productos WHERE id = ${id}`;
     connection.query(sql, error => {
@@ -98,3 +98,8 @@ connection.connect(error => {
 });
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+
+// https://api-cejam-web.herokuapp.com/products
+
+// heroku ps:scale web=0
+// heroku ps:scale web=1
