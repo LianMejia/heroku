@@ -4,13 +4,8 @@
   "description": "api para web",
   "main": "app.js",
   "scripts": {
-    "dev": "react-scripts start",
-    "start": "serve -s build",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env = jsdom ",
-    " eject " :" react-scriptseject ",
-    " heroku-postbuild ":" npm run build "
-    },
+    "start": "node index.js"
+  },
   "author": "Lian Mejia <lianmejiag@gmail.com>",
   "license": "MIT",
   "devDependencies": {
@@ -18,8 +13,7 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
-    "express": "^4.17.1",
     "mysql": "^2.18.1",
-    "serve": "^11.3.2"
+    "express": "^4.17.1"
   }
 }
