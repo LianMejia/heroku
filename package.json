@@ -4,7 +4,7 @@
   "description": "api para web",
   "main": "app.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node ."
   },
   "author": "Lian Mejia <lianmejiag@gmail.com>",
   "license": "MIT",
