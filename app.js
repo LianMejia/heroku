@@ -58,6 +58,7 @@ app.get('/products/:id', (req, res) => {
 app.post('/products', (req, res) => {
     const sql = 'INSERT INTO productos SET ?';
     const productsObj = {
+        id: req.body.id,
         title: req.body.title,
         price: req.body.price,
         image: req.body.image,
@@ -73,8 +74,8 @@ app.post('/products', (req, res) => {
 
 app.put('/products/:id', (req, res) => {
     const {id} = req.params;
-    const {title, price, image, description} = req.body;
-    const sql = `UPDATE productos SET title = '${title}', price = '${price}', image = '${image}' description = '${description}'
+    const {id, title, price, image, description} = req.body;
+    const sql = `UPDATE productos SET id = '${id}', title = '${title}', price = '${price}', image = '${image}' description = '${description}'
     WHERE id = ${id}`;
     connection.query(sql, error => {
         if(error) throw error;
