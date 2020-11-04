@@ -42,8 +42,8 @@ app.get('/products', (req, res) => {
 });
 
 app.get('/products/:id', (req, res) => {
-    const{id} = req.params
-    const sql = `SELECT * FROM productos WHERE id = ${id}`
+    const{id} = req.params;
+    const sql = `SELECT * FROM productos WHERE id = ${id}`;
     connection.query(sql, (error, result) =>{
         if(error) throw error;
         if(result.length > 0){
@@ -60,8 +60,10 @@ app.post('/products', (req, res) => {
     const productsObj = {
         titulo: req.body.titulo,
         price: req.body.price,
-        description: req.body.description
-    }
+        image: req.body.image,
+        description: req.body.description,
+
+    };
     connection.query(sql, productsObj, error => {
         if(error) throw error;
         res.send('Product created!');
@@ -71,8 +73,8 @@ app.post('/products', (req, res) => {
 
 app.put('/products/:id', (req, res) => {
     const {id} = req.params;
-    const {titulo, price, description} = req.body;
-    const sql = `UPDATE productos SET titulo = '${titulo}', price = '${price}', description = '${description}'
+    const {titulo, price, image, description} = req.body;
+    const sql = `UPDATE productos SET titulo = '${titulo}', price = '${price}', image = '${image}' description = '${description}'
     WHERE id = ${id}`;
     connection.query(sql, error => {
         if(error) throw error;
