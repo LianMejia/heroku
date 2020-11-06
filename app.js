@@ -55,6 +55,19 @@ app.get('/ropa', (req, res) => {
     });
 });
 
+app.get('/zapatos', (req, res) => {
+    const sql = 'SELECT * FROM zapatos';
+
+    connection.query(sql, (error, results) =>{
+        if(error) throw error;
+        if(results.length > 0){
+            res.json(results);
+        }else{
+            res.send('Not result');
+        }
+    });
+});
+
 ////////////////////////////////////////////////////////////////
 
 app.get('/products/:id', (req, res) => {
@@ -74,6 +87,20 @@ app.get('/products/:id', (req, res) => {
 app.get('/ropa/:id', (req, res) => {
     const{id} = req.params;
     const sql = `SELECT * FROM ropa WHERE id = ${id}`;
+    connection.query(sql, (error, result) =>{
+        if(error) throw error;
+        if(result.length > 0){
+            res.json(result);
+        }else{
+            res.send('Not result');
+        }
+    });
+    /* res.send('Get products by Id'); */
+});
+
+app.get('/zapatos/:id', (req, res) => {
+    const{id} = req.params;
+    const sql = `SELECT * FROM zapatos WHERE id = ${id}`;
     connection.query(sql, (error, result) =>{
         if(error) throw error;
         if(result.length > 0){
@@ -110,13 +137,25 @@ app.post('/ropa', (req, res) => {
         price: req.body.price,
         image: req.body.image,
         description: req.body.description,
-
     };
     connection.query(sql, productsObj, error => {
         if(error) throw error;
         res.send('Product created!');
     });
-    /* res.send('New product'); */
+});
+
+app.post('/zapatos', (req, res) => {
+    const sql = 'INSERT INTO zapatos SET ?';
+    const productsObj = {
+        title: req.body.title,
+        price: req.body.price,
+        /* image: req.body.image, */
+        description: req.body.description,
+    };
+    connection.query(sql, productsObj, error => {
+        if(error) throw error;
+        res.send('Product created!');
+    });
 });
 
 ////////////////////////////////////////////////////////////////
@@ -124,7 +163,7 @@ app.post('/ropa', (req, res) => {
 app.put('/products/:id', (req, res) => {
     const {id} = req.params;
     const {title, price, image, description} = req.body;
-    const sql = `UPDATE productos SET title = '${title}', price = '${price}', image = '${image}' description = '${description}'
+    const sql = `UPDATE productos SET title = '${title}', price = '${price}', image = '${image}', description = '${description}'
     WHERE id = ${id}`;
     connection.query(sql, error => {
         if(error) throw error;
@@ -136,7 +175,19 @@ app.put('/products/:id', (req, res) => {
 app.put('/ropa/:id', (req, res) => {
     const {id} = req.params;
     const {title, price, image, description} = req.body;
-    const sql = `UPDATE ropa SET title = '${title}', price = '${price}', image = '${image}' description = '${description}'
+    const sql = `UPDATE ropa SET title = '${title}', price = '${price}', image = '${image}', description = '${description}'
+    WHERE id = ${id}`;
+    connection.query(sql, error => {
+        if(error) throw error;
+        res.send('Product updated!');
+    });
+    /* res.send('Update product'); */
+});
+
+app.put('/zapatos/:id', (req, res) => {
+    const {id} = req.params;
+    const {title, price, /* image, */ description} = req.body;
+    const sql = `UPDATE zapatos SET title = '${title}', price = '${price}', description = '${description}'
     WHERE id = ${id}`;
     connection.query(sql, error => {
         if(error) throw error;
@@ -166,6 +217,18 @@ app.delete('/ropa/:id', (req, res) => {
     });
     /* res.send('Delete product'); */
 });
+
+app.delete('/zapatos/:id', (req, res) => {
+    const {id} = req.params;
+    const sql = `DELETE FROM zapatos WHERE id = ${id}`;
+    connection.query(sql, error => {
+        if(error) throw error;
+        res.send('Delete product');
+    });
+    /* res.send('Delete product'); */
+});
+
+////////////////////////////////////////////////////////////////
 
 // Check connect
 connection.connect(error => {
