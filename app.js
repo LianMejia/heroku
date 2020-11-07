@@ -57,7 +57,6 @@ app.get('/ropa', (req, res) => {
 
 app.get('/zapatos', (req, res) => {
     const sql = 'SELECT * FROM zapatos';
-
     connection.query(sql, (error, results) =>{
         if(error) throw error;
         if(results.length > 0){
@@ -149,7 +148,7 @@ app.post('/zapatos', (req, res) => {
     const productsObj = {
         title: req.body.title,
         price: req.body.price,
-        /* image: req.body.image, */
+        image: req.body.image, 
         description: req.body.description,
     };
     connection.query(sql, productsObj, error => {
@@ -186,8 +185,8 @@ app.put('/ropa/:id', (req, res) => {
 
 app.put('/zapatos/:id', (req, res) => {
     const {id} = req.params;
-    const {title, price, /* image, */ description} = req.body;
-    const sql = `UPDATE zapatos SET title = '${title}', price = '${price}', description = '${description}'
+    const {title, price, image, description} = req.body;
+    const sql = `UPDATE zapatos SET title = '${title}', price = '${price}', image = '${image}', description = '${description}'
     WHERE id = ${id}`;
     connection.query(sql, error => {
         if(error) throw error;
