@@ -85,7 +85,7 @@ app.get('/products/:id', (req, res) => {
 
 app.get('/ropa/:id', (req, res) => {
     const{id} = req.params;
-    const sql = `SELECT * FROM ropa WHERE id = ${id}`;
+    const sql = `SELECT * FROM ropa WHERE id = ${id}, title = ${title}`;
     connection.query(sql, (error, result) =>{
         if(error) throw error;
         if(result.length > 0){
