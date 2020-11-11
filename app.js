@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 ////////////////////////////////////////////////////////////////
 // all customers 
 app.get('/products', (req, res) => {
-    const sql = 'SELECT * FROM productos';
+    const sql = 'SELECT * FROM products';
 
     connection.query(sql, (error, results) =>{
         if(error) throw error;
@@ -71,7 +71,7 @@ app.get('/zapatos', (req, res) => {
 
 app.get('/products/:id', (req, res) => {
     const{id} = req.params;
-    const sql = `SELECT * FROM productos WHERE id = ${id}`;
+    const sql = `SELECT * FROM products WHERE id = ${id}`;
     connection.query(sql, (error, result) =>{
         if(error) throw error;
         if(result.length > 0){
@@ -114,7 +114,7 @@ app.get('/zapatos/:id', (req, res) => {
 ////////////////////////////////////////////////////////////////
 
 app.post('/products', (req, res) => {
-    const sql = 'INSERT INTO productos SET ?';
+    const sql = 'INSERT INTO products SET ?';
     const productsObj = {
         title: req.body.title,
         price: req.body.price,
@@ -162,7 +162,7 @@ app.post('/zapatos', (req, res) => {
 app.put('/products/:id', (req, res) => {
     const {id} = req.params;
     const {title, price, image, description} = req.body;
-    const sql = `UPDATE productos SET title = '${title}', price = '${price}', image = '${image}', description = '${description}'
+    const sql = `UPDATE products SET title = '${title}', price = '${price}', image = '${image}', description = '${description}'
     WHERE id = ${id}`;
     connection.query(sql, error => {
         if(error) throw error;
@@ -199,7 +199,7 @@ app.put('/zapatos/:id', (req, res) => {
 
 app.delete('/products/:id', (req, res) => {
     const {id} = req.params;
-    const sql = `DELETE FROM productos WHERE id = ${id}`;
+    const sql = `DELETE FROM products WHERE id = ${id}`;
     connection.query(sql, error => {
         if(error) throw error;
         res.send('Delete product');
