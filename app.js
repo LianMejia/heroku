@@ -3,7 +3,7 @@ const mysql = require('mysql');
 
 const bodyParser = require('body-parser');
 
-const PORT = process.env.PORT || 3006;
+const PORT = process.env.PORT || 80; //3006
 
 const app = express();
 
@@ -28,10 +28,9 @@ app.get('/', (req, res) => {
 });
 
 ////////////////////////////////////////////////////////////////
-// all customers 
+// all products 
 app.get('/products', (req, res) => {
     const sql = 'SELECT * FROM products';
-
     connection.query(sql, (error, results) =>{
         if(error) throw error;
         if(results.length > 0){
@@ -69,19 +68,34 @@ app.get('/zapatos', (req, res) => {
 
 ////////////////////////////////////////////////////////////////
 
+
 app.get('/products/:id', (req, res) => {
-    const{id} = req.params;
+    const {id} = req.params;
     const sql = `SELECT * FROM products WHERE id = ${id}`;
     connection.query(sql, (error, result) =>{
         if(error) throw error;
         if(result.length > 0){
-            res.json(result);
+            /* res.json(result); */
+            res.json(title);
+            res.json(description);
         }else{
             res.send('Not result');
         }
     });
-    /* res.send('Get products by Id'); */
 });
+
+/* router.get('/products/:id', (req, res) => {
+    (async () => {
+        try{
+        const doc = db.collection("products").doc(req.params.product_id);
+        const item = await doc.get();
+        const response = item.data();
+        return res.status(200).json(response);
+        }catch(error){
+            return res.status(500).send(error);
+        }
+    })();
+}); */
 
 app.get('/ropa/:id', (req, res) => {
     const{id} = req.params;
@@ -235,7 +249,7 @@ connection.connect(error => {
     console.log('Database server running!');
 });
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 // https://api-cejam-web.herokuapp.com/products
 
