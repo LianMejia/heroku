@@ -71,11 +71,13 @@ app.get('/zapatos', (req, res) => {
 
 app.get('/products/:id', (req, res) => {
     const { id } = req.params;
-    const sql = ('SELECT * FROM products WHERE id = ?', [id]);
+    const sql = `SELECT * FROM products WHERE id = ${id}`;
     connection.query(sql, (error, result) =>{
-        /* if(error) throw error; */
-        if(sql.length > 0){
-            return res.json(sql[0]);
+        if(error) throw error;
+        if(result.length > 0){
+            res.json(sql);
+        }else{
+            res.send('Not result');
         }
     });
 });
