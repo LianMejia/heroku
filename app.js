@@ -75,7 +75,7 @@ app.get('/products/:id', (req, res) => {
     connection.query(sql, (error, result) =>{
         if(error) throw error;
         if(result.length > 0){
-            res.json(sql);
+            res.json(result);
         }else{
             res.send('Not result');
         }
