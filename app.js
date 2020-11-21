@@ -82,26 +82,13 @@ app.get('/products/:id', (req, res) => {
     });
 });
 
-/* router.get('/products/:id', (req, res) => {
-    (async () => {
-        try{
-        const doc = db.collection("products").doc(req.params.product_id);
-        const item = await doc.get();
-        const response = item.data();
-        return res.status(200).json(response);
-        }catch(error){
-            return res.status(500).send(error);
-        }
-    })();
-}); */
-
 app.get('/ropa/:id', (req, res) => {
     const{id} = req.params;
     const sql = `SELECT * FROM ropa WHERE id = ${id}`;
     connection.query(sql, (error, result) =>{
         if(error) throw error;
         if(result.length > 0){
-            res.json(result);
+            res.json(result[0]);
         }else{
             res.send('Not result');
         }
@@ -115,7 +102,7 @@ app.get('/zapatos/:id', (req, res) => {
     connection.query(sql, (error, result) =>{
         if(error) throw error;
         if(result.length > 0){
-            res.json(result);
+            res.json(result[0]);
         }else{
             res.send('Not result');
         }
